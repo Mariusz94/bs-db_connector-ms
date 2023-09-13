@@ -40,3 +40,18 @@ FOO_MS_IP = str(os.environ.get("FOO_MS_IP", "localhost"))
 
 FOO_MS_PORT = str(os.environ.get("FOO_MS_PORT", "80"))
 """Port Foo microservice"""
+
+BS_DATABASE_IP = str(os.environ.get("BS_DATABASE_IP", "localhost"))
+"""Database IP."""
+
+BS_DATABASE_PORT = str(os.environ.get("BS_DATABASE_PORT", "6666"))
+"""Database port."""
+
+BS_DATABASE_USERNAME = str(os.environ.get("BS_DATABASE_USERNAME", "postgres"))
+"""Database username."""
+
+BS_DATABASE_PASSWORD = str(os.environ.get("BS_DATABASE_PASSWORD", "password"))
+"""Database password."""
+
+BS_DATABASE_NAME = str(os.environ.get("BS_DATABASE_NAME", "postgres"))
+"""Database name."""
