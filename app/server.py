@@ -1,22 +1,18 @@
 import logging
-import sys, os
+import os
+import sys
 from concurrent import futures
 
 import config
+import grpc
 import service.grpc_exceptions.grpc_exceptions as gRPC_exceptions
 from google.protobuf.json_format import MessageToDict
 from service.logs_service.app_logs import config_logs, init_logging
 
-import grpc
-
-
 sys.path.append(r"./grpc_file")
 
+from grpc_file.bs_db_connector_msg import db_connector_pb2, db_connector_pb2_grpc
 from grpc_file.default_msg import default_pb2
-from grpc_file.bs_db_connector_msg import (
-    db_connector_pb2,
-    db_connector_pb2_grpc,
-)
 
 
 class DbConnectorService:
@@ -87,79 +83,6 @@ class DbConnectorService:
         except Exception as e:
             logging.exception("Method 'FooMethod2' ended with some errors:\n{e}")
             gRPC_exceptions.raise_unknown_grpc_exception(e=e, context=context)
-
-    # def FooMethodDownloadFile(
-    #     self, request: foo_pb2.FooFileInfo, context: grpc.ServicerContext
-    # ) -> foo_pb2.FooFile:
-    #     """
-    #     Sample function.
-
-    #     Args:
-    #         request (foo_pb2.FooFileInfo): A gRPC message containing information.
-    #         context (grpc.ServicerContext): Metadata actual session.
-
-    #     Returns:
-    #         foo_pb2.FooFile: A gRPC message containing response file.
-    #     """
-    #     logging.info("Started method: 'FooMethodDownloadFile'")
-    #     try:
-    #         data_dict = MessageToDict(request, preserving_proto_field_name=True)
-
-    #         foo_file_name = request.foo_file_name
-
-    #         file_path = os.path.join(os.getcwd(), "assets", "images", "python_img.jpeg")
-
-    #         with open(file_path, "rb") as image:
-    #             f = image.read()
-    #             image_byte = bytes(f)
-
-    #         response = foo_pb2.FooFile(
-    #             foo_file_name=foo_file_name,
-    #             foo_file=image_byte,
-    #         )
-
-    #         logging.info("Finished method: 'FooMethodDownloadFile'")
-    #         yield response
-
-    #     except Exception as e:
-    #         logging.exception(
-    #             "Method 'FooMethodDownloadFile' ended with some errors:\n{e}"
-    #         )
-    #         gRPC_exceptions.raise_unknown_grpc_exception(e=e, context=context)
-
-    # def FooMethodUploadFile(
-    #     self, request_iterator, context: grpc.ServicerContext
-    # ) -> foo_pb2.FooStatus:
-    #     """
-    #     Sample function.
-
-    #     Args:
-    #         request_iterator (foo_pb2.FooFile): A gRPC message containing file.
-    #         context (grpc.ServicerContext): Metadata actual session.
-
-    #     Returns:
-    #         foo_pb2.FooStatus: A gRPC message containing response information.
-    #     """
-    #     logging.info("Started method: 'FooMethodUploadFile'")
-    #     try:
-    #         foo_file_name = ""
-    #         foo_file = None
-    #         for request in request_iterator:
-    #             foo_file_name = request.foo_file_name
-    #             foo_file = request.foo_file
-
-    #         response = foo_pb2.FooStatus(
-    #             status="SUCCESS",
-    #         )
-
-    #         logging.info("Finished method: 'FooMethodUploadFile'")
-    #         return response
-
-    #     except Exception as e:
-    #         logging.exception(
-    #             "Method 'FooMethodUploadFile' ended with some errors:\n{e}"
-    #         )
-    #         gRPC_exceptions.raise_unknown_grpc_exception(e=e, context=context)
 
 
 def run_server():
