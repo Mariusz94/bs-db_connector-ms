@@ -2,3 +2,7 @@ python-dotenv==1.0.0
 
 grpcio==1.50.0
 grpcio-tools==1.50.0
+
+sqlalchemy==1.4.44
+pandas==1.5.0
+psycopg2-binary==2.9.5

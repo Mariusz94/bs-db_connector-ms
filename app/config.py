@@ -55,3 +55,6 @@ BS_DATABASE_PASSWORD = str(os.environ.get("BS_DATABASE_PASSWORD", "password"))
 
 BS_DATABASE_NAME = str(os.environ.get("BS_DATABASE_NAME", "postgres"))
 """Database name."""
+
+BS_DATABASE_SCHEMA = str(os.environ.get("BS_DATABASE_SCHEMA", "public"))
+"""Database schema."""
