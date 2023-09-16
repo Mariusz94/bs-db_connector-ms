@@ -30,14 +30,14 @@ def get_balance(db: PSQLDatabase, user_id: str) -> pd.DataFrame:
 
 def get_user_info(db: PSQLDatabase, user_id: str) -> pd.DataFrame:
     """
-    Method allow obtain balance for user by user id.
+    Method allow obtain user info by user id.
 
     Args:
         db (PSQLDatabase): Instance of database.
         user_id (str): User id.
 
     Returns:
-        pd.DataFrame: Balance info.
+        pd.DataFrame: User info.
     """
     logging.info("Getting balance for user {user_id}")
     try:
