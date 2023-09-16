@@ -3,7 +3,7 @@ from service.database.psql_database import PSQLDatabase
 import pandas as pd
 
 
-def getBalance(db: PSQLDatabase, user_id: str) -> pd.DataFrame:
+def get_balance(db: PSQLDatabase, user_id: str) -> pd.DataFrame:
     """
     Method allow obtain balance for user by user id.
 
@@ -16,7 +16,7 @@ def getBalance(db: PSQLDatabase, user_id: str) -> pd.DataFrame:
     """
     logging.info("Getting balance for user {user_id}")
     try:
-        table_name: str = "user"
+        table_name: str = "balance"
         table = db.get_table(table_name)
         query = table.select().where(table.c.id == user_id)
         df = db.get_df_from_sql(query=query)
@@ -28,7 +28,7 @@ def getBalance(db: PSQLDatabase, user_id: str) -> pd.DataFrame:
         raise error
 
 
-def getUserInfo(db: PSQLDatabase, user_id: str) -> pd.DataFrame:
+def get_user_info(db: PSQLDatabase, user_id: str) -> pd.DataFrame:
     """
     Method allow obtain balance for user by user id.
 

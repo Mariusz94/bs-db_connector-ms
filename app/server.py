@@ -35,7 +35,7 @@ class DbConnectorService:
         try:
             user_id = request.user_id
 
-            data = grpc_service.getBalance(user_id)
+            data = grpc_service.get_balance(user_id)
 
             response = db_connector_pb2.BalanceInfo(
                 balance=data["balance"], currency=data["currency"]
@@ -65,7 +65,7 @@ class DbConnectorService:
         try:
             user_id = request.user_id
 
-            data = grpc_service.getUserInfo(user_id)
+            data = grpc_service.get_user_info(user_id)
 
             response = db_connector_pb2.UserInfo(
                 id=data["id"],
@@ -101,7 +101,7 @@ def run_server():
                 ("grpc.max_receive_message_length", config.MAX_MSG_LENGTH),
             ],
         )
-        db_connector_pb2_grpc.add_DbConnectorServicer_to_server(
+        db_connector_pb2_grpc.add_DbConnectorServiceServicer_to_server(
             DbConnectorService(), server
         )
         server.add_insecure_port("[::]:" + str(config.SERVICE_PORT))

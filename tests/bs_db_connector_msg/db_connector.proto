@@ -1,0 +1,36 @@
+syntax = "proto3";
+import "default_msg/default.proto";
+
+service DbConnectorService {
+    rpc GetBalance(UserId) returns (BalanceInfo);
+    rpc GetUserInfo(UserId) returns (UserInfo);
+    // rpc FooMethodDownloadFile(FooFileInfo) returns (stream FooFile) {}
+    // rpc FooMethodUploadFile(stream FooFile) returns (FooStatus) {}
+}
+
+message UserId {
+    string user_id = 1;
+}
+
+message BalanceInfo {
+    float balance = 1;
+    string currency = 2;
+}
+
+message UserInfo {
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string phone_number = 4;
+    string address = 5;
+    string login = 6;
+}
+
+// message FooFile {
+//     string foo_file_name = 1;
+//     bytes foo_file = 2;
+// }
+
+// message FooStatus {
+//     string status = 1;
+// }

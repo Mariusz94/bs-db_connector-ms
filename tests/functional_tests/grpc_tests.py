@@ -3,37 +3,39 @@ import sys
 
 import grpc
 import pytest
-import service.connectors.foo_service as foo_service
+import service.connectors.db_connector_service as db_connector_service
 
 from default_msg import default_pb2
-from foo_msg import foo_pb2
+from bs_db_connector_msg import db_connector_pb2
 
 
-def test_foo_method_1():
-    data: dict = foo_service.foo_method_1()
+@pytest.mark.parametrize(
+    "user_id",
+    [
+        ("6242d2c0-0cfe-4b71-bbc7-f9bed50d687a"),
+        ("cf32f337-afe4-4876-a835-6ba853c32804"),
+    ],
+)
+def test_get_balance(user_id: str):
+    data: dict = db_connector_service.get_balance(user_id)
 
-    assert data["foo_response"] == "Sample response"
-
-
-def test_foo_method_2():
-    data: dict = foo_service.foo_method_2()
-
-    assert len(data) == 0
-
-
-def test_foo_method_download_file():
-    foo_file, data = foo_service.foo_method_download_file()
-
-    assert data["foo_file_name"] == "sample_name.jpg"
+    assert data["balance"] >= 0
+    assert data["currency"] == "PLN"
 
 
-def test_foo_method_upload_file():
-    file_path = os.path.join(os.getcwd(),"tests", "assets", "images", "python_img.jpeg")
+@pytest.mark.parametrize(
+    "user_id",
+    [
+        ("6242d2c0-0cfe-4b71-bbc7-f9bed50d687a"),
+        ("cf32f337-afe4-4876-a835-6ba853c32804"),
+    ],
+)
+def test_get_user_info(user_id: str):
+    data: dict = db_connector_service.get_user_info(user_id)
 
-    with open(file_path, "rb") as image:
-        f = image.read()
-        image_byte = bytes(f)
-
-    data: dict = foo_service.foo_method_upload_file(foo_file=image_byte)
-
-    assert data["status"] == "SUCCESS"
+    assert "id" in data
+    assert "first_name" in data
+    assert "last_name" in data
+    assert "phone_number" in data
+    assert "address" in data
+    assert "login" in data

@@ -35,11 +35,11 @@ LOGGER_FORMAT_DEBUG = "%(asctime)s.%(msecs)03d-%(levelname)s-%(filename)s.%(func
 LOGGER_FORMAT = LOGGER_FORMAT_INFO if LOGGING_MODE == "INFO" else LOGGER_FORMAT_DEBUG
 """Logger format."""
 
-FOO_MS_IP = str(os.environ.get("FOO_MS_IP", "localhost"))
-"""Address Foo microservice"""
+BS_DB_CONNECTOR_MS_IP = str(os.environ.get("BS_DB_CONNECTOR_MS_IP", "localhost"))
+"""Address bs-db_connector-ms microservice"""
 
-FOO_MS_PORT = str(os.environ.get("FOO_MS_PORT", "80"))
-"""Port Foo microservice"""
+BS_DB_CONNECTOR_MS_PORT = str(os.environ.get("BS_DB_CONNECTOR_MS_PORT", "91"))
+"""Port bs-db_connector-ms microservice"""
 
 BS_DATABASE_IP = str(os.environ.get("BS_DATABASE_IP", "localhost"))
 """Database IP."""
