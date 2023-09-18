@@ -33,3 +33,18 @@ def get_user_info(user_id: str) -> dict:
     df: pd.DataFrame = psql_database_repository.get_user_info(BS_DB, user_id)
     data = df.to_dict(orient="index")
     return data[0]
+
+def login(login:str, password:str) -> dict:
+    """
+    Method to login user.
+
+    Args:
+        login (str): User login.
+        password (str): User password.
+
+    Returns:
+        dict: User info.
+    """
+    df: pd.DataFrame = psql_database_repository.login(BS_DB, login, password)
+    data = df.to_dict(orient="index")
+    return data[0]

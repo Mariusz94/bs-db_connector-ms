@@ -39,3 +39,18 @@ def test_get_user_info(user_id: str):
     assert "phone_number" in data
     assert "address" in data
     assert "login" in data
+
+
+@pytest.mark.parametrize(
+    "login,password",
+    [("7654", "pass_1"), ("12344", "pass_2")],
+)
+def test_login(login: str, password: str):
+    data: dict = db_connector_service.login(login, password)
+
+    assert "id" in data
+    assert "first_name" in data
+    assert "last_name" in data
+    assert "phone_number" in data
+    assert "address" in data
+    assert "login" in data

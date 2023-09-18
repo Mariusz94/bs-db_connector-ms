@@ -24,6 +24,11 @@ class DbConnectorServiceStub(object):
                 request_serializer=bs__db__connector__msg_dot_db__connector__pb2.UserId.SerializeToString,
                 response_deserializer=bs__db__connector__msg_dot_db__connector__pb2.UserInfo.FromString,
                 )
+        self.Login = channel.unary_unary(
+                '/DbConnectorService/Login',
+                request_serializer=bs__db__connector__msg_dot_db__connector__pb2.LoginData.SerializeToString,
+                response_deserializer=bs__db__connector__msg_dot_db__connector__pb2.UserInfo.FromString,
+                )
 
 
 class DbConnectorServiceServicer(object):
@@ -36,9 +41,13 @@ class DbConnectorServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetUserInfo(self, request, context):
-        """rpc FooMethodDownloadFile(FooFileInfo) returns (stream FooFile) {}
-        rpc FooMethodUploadFile(stream FooFile) returns (FooStatus) {}
-        """
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Login(self, request, context):
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -54,6 +63,11 @@ def add_DbConnectorServiceServicer_to_server(servicer, server):
             'GetUserInfo': grpc.unary_unary_rpc_method_handler(
                     servicer.GetUserInfo,
                     request_deserializer=bs__db__connector__msg_dot_db__connector__pb2.UserId.FromString,
+                    response_serializer=bs__db__connector__msg_dot_db__connector__pb2.UserInfo.SerializeToString,
+            ),
+            'Login': grpc.unary_unary_rpc_method_handler(
+                    servicer.Login,
+                    request_deserializer=bs__db__connector__msg_dot_db__connector__pb2.LoginData.FromString,
                     response_serializer=bs__db__connector__msg_dot_db__connector__pb2.UserInfo.SerializeToString,
             ),
     }
@@ -96,6 +110,23 @@ class DbConnectorService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/DbConnectorService/GetUserInfo',
             bs__db__connector__msg_dot_db__connector__pb2.UserId.SerializeToString,
+            bs__db__connector__msg_dot_db__connector__pb2.UserInfo.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Login(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/DbConnectorService/Login',
+            bs__db__connector__msg_dot_db__connector__pb2.LoginData.SerializeToString,
             bs__db__connector__msg_dot_db__connector__pb2.UserInfo.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

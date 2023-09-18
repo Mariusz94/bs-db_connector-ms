@@ -83,6 +83,42 @@ class DbConnectorService:
             logging.exception("Method 'GetUserInfo' ended with some errors:\n{e}")
             gRPC_exceptions.raise_unknown_grpc_exception(e=e, context=context)
 
+    def Login(
+        self, request: db_connector_pb2.LoginData, context: grpc.ServicerContext
+    ) -> db_connector_pb2.UserInfo:
+        """
+        Function to check if user exist.
+
+        Args:
+            request (db_connector_pb2.LoginData): A gRPC message containing information.
+            context (grpc.ServicerContext): Metadata actual session.
+
+        Returns:
+            db_connector_pb2.UserInfo: A gRPC message containing response information.
+        """
+        logging.info("Started method: 'Login'")
+        try:
+            login = request.login
+            password = request.password
+
+            data = grpc_service.login(login, password)
+
+            response = db_connector_pb2.UserInfo(
+                id=data["id"],
+                first_name=data["first_name"],
+                last_name=data["last_name"],
+                phone_number=data["phone_number"],
+                address=data["address"],
+                login=data["login"],
+            )
+
+            logging.info("Finished method: 'Login'")
+            return response
+
+        except Exception as e:
+            logging.exception("Method 'Login' ended with some errors:\n{e}")
+            gRPC_exceptions.raise_unknown_grpc_exception(e=e, context=context)
+
 
 def run_server():
     """

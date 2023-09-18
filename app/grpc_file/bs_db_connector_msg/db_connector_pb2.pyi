@@ -13,6 +13,14 @@ class BalanceInfo(_message.Message):
     currency: str
     def __init__(self, balance: _Optional[float] = ..., currency: _Optional[str] = ...) -> None: ...
 
+class LoginData(_message.Message):
+    __slots__ = ["login", "password"]
+    LOGIN_FIELD_NUMBER: _ClassVar[int]
+    PASSWORD_FIELD_NUMBER: _ClassVar[int]
+    login: str
+    password: str
+    def __init__(self, login: _Optional[str] = ..., password: _Optional[str] = ...) -> None: ...
+
 class UserId(_message.Message):
     __slots__ = ["user_id"]
     USER_ID_FIELD_NUMBER: _ClassVar[int]
