@@ -35,7 +35,7 @@ class DbConnectorService:
         try:
             user_id = request.user_id
 
-            data = grpc_service.get_balance(user_id)
+            data: dict = grpc_service.get_balance(user_id)
 
             response = db_connector_pb2.BalanceInfo(
                 balance=data["balance"], currency=data["currency"]
@@ -65,7 +65,7 @@ class DbConnectorService:
         try:
             user_id = request.user_id
 
-            data = grpc_service.get_user_info(user_id)
+            data: dict = grpc_service.get_user_info(user_id)
 
             response = db_connector_pb2.UserInfo(
                 id=data["id"],
@@ -101,7 +101,7 @@ class DbConnectorService:
             login = request.login
             password = request.password
 
-            data = grpc_service.login(login, password)
+            data: dict = grpc_service.login(login, password)
 
             response = db_connector_pb2.UserInfo(
                 id=data["id"],

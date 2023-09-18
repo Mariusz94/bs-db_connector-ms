@@ -34,9 +34,10 @@ def get_user_info(user_id: str) -> dict:
     data = df.to_dict(orient="index")
     return data[0]
 
-def login(login:str, password:str) -> dict:
+
+def login(login: str, password: str) -> dict:
     """
-    Method to login user.
+    Method to log in user.
 
     Args:
         login (str): User login.
